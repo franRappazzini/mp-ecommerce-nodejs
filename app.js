@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const exphbs = require("express-handlebars");
 const createPayment = require("./utils/function");
-const port = process.env.PORT || 3000;
 
 const app = express();
 
@@ -41,4 +40,5 @@ app.get("/pending", function (req, res) {
   res.render("pending", req.query);
 });
 
+var port = process.env.PORT || 3000;
 app.listen(port);
