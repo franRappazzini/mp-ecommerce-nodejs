@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const exphbs = require("express-handlebars");
-const mp = require("./routes/mercadopago");
 const createPayment = require("./utils/function");
 const port = process.env.PORT || 3000;
 
@@ -9,11 +8,8 @@ const app = express();
 
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
-
 app.use(express.static("assets"));
 app.use("/assets", express.static(__dirname + "/assets"));
-
-app.use("/mercadopago", mp);
 
 app.get("/", function (req, res) {
   res.render("home");
@@ -29,7 +25,6 @@ app.get("/detail", async (req, res) => {
   };
   const response = await createPayment(product);
   const data = { ...req.query, url: response.init_point };
-  console.log(data);
   res.render("detail", data);
 });
 

@@ -14,7 +14,9 @@ const createPayment = async (product) => {
       //     quantity: 1,
       //     unit_price: 10,
       //   },
-      { ...product },
+
+      // TODO falta img con url valido + id (4 números)
+      { ...product, description: "Dispositivo móvil de Tienda e-commerce" },
     ],
     payer: {
       name: "Lalo",
@@ -48,6 +50,7 @@ const createPayment = async (product) => {
       ],
       installments: 6,
     },
+    external_reference: "fran_rappa@outlook.com",
   };
 
   try {
