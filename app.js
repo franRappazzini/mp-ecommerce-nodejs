@@ -24,6 +24,7 @@ app.get("/detail", async (req, res) => {
     unit_price: parseFloat(price),
   };
   const response = await createPayment(product);
+  console.log(response);
   const data = { ...req.query, url: response.init_point };
   res.render("detail", data);
 });
@@ -40,4 +41,4 @@ app.get("/pending", function (req, res) {
   res.render("pending", req.query);
 });
 
-app.listen(port, () => console.log("Server listening on port:", port));
+app.listen(port);

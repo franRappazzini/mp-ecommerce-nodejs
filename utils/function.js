@@ -16,7 +16,11 @@ const createPayment = async (product) => {
       //   },
 
       // TODO falta img con url valido + id (4 números)
-      { ...product, description: "Dispositivo móvil de Tienda e-commerce" },
+      {
+        ...product,
+        description: "Dispositivo móvil de Tienda e-commerce",
+        picture_url: "https://franrappazz-mp-commerce-nodejs.herokuapp.com/" + product.picture_url,
+      },
     ],
     payer: {
       name: "Lalo",
