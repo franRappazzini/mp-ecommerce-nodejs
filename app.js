@@ -1,22 +1,48 @@
-var express = require('express');
-var exphbs  = require('express-handlebars');
-var port = process.env.PORT || 3000
+require("dotenv").config();
+const express = require("express");
+const exphbs = require("express-handlebars");
+const mp = require("./routes/mercadopago");
+const createPayment = require("./utils/function");
+const port = process.env.PORT || 3000;
 
-var app = express();
- 
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
+const app = express();
 
-app.use(express.static('assets'));
- 
-app.use('/assets', express.static(__dirname + '/assets'));
+app.engine("handlebars", exphbs());
+app.set("view engine", "handlebars");
 
-app.get('/', function (req, res) {
-    res.render('home');
+app.use(express.static("assets"));
+app.use("/assets", express.static(__dirname + "/assets"));
+
+app.use("/mercadopago", mp);
+
+app.get("/", function (req, res) {
+  res.render("home");
 });
 
-app.get('/detail', function (req, res) {
-    res.render('detail', req.query);
+app.get("/detail", async (req, res) => {
+  const { title, price, img, unit } = req.query;
+  const product = {
+    title,
+    picture_url: img,
+    quantity: parseInt(unit),
+    unit_price: parseFloat(price),
+  };
+  const response = await createPayment(product);
+  const data = { ...req.query, url: response.init_point };
+  console.log(data);
+  res.render("detail", data);
 });
 
-app.listen(port);
+app.get("/success", function (req, res) {
+  res.render("success", req.query);
+});
+
+app.get("/failure", function (req, res) {
+  res.render("failure", req.query);
+});
+
+app.get("/pending", function (req, res) {
+  res.render("pending", req.query);
+});
+
+app.listen(port, () => console.log("Server listening on port:", port));
