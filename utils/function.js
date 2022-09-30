@@ -44,9 +44,9 @@ const createPayment = async (product) => {
       },
     },
     back_urls: {
-      failure: "http://localhost:3000/failure",
-      pending: "http://localhost:3000/pending",
-      success: "http://localhost:3000/success",
+      failure: "https://franrappazzini-mp-ecommerce-nodejs.onrender.com/failure",
+      pending: "https://franrappazzini-mp-ecommerce-nodejs.onrender.com/pending",
+      success: "https://franrappazzini-mp-ecommerce-nodejs.onrender.com/success",
     },
     auto_return: "approved",
     payment_methods: {
