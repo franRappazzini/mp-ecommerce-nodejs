@@ -10,7 +10,7 @@ app.set("view engine", "handlebars");
 app.use(express.static("assets"));
 app.use("/assets", express.static(__dirname + "/assets"));
 
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
   res.render("home");
 });
 
@@ -23,21 +23,25 @@ app.get("/detail", async (req, res) => {
     unit_price: parseFloat(price),
   };
   const response = await createPayment(product);
-  console.log(response);
   const data = { ...req.query, url: response.init_point };
   res.render("detail", data);
 });
 
-app.get("/success", function (req, res) {
+app.get("/success", (req, res) => {
   res.render("success", req.query);
 });
 
-app.get("/failure", function (req, res) {
+app.get("/failure", (req, res) => {
   res.render("failure", req.query);
 });
 
-app.get("/pending", function (req, res) {
+app.get("/pending", (req, res) => {
   res.render("pending", req.query);
+});
+
+app.post("/notifications", (req, res) => {
+  console.log(req.query);
+  res.status(200).json(req.query);
 });
 
 const port = process.env.PORT || 3000;

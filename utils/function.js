@@ -58,7 +58,7 @@ const createPayment = async (product) => {
       installments: 6,
     },
     external_reference: "fran_rappa@outlook.com",
-    notification_url: "https://franrappazzini-mp-ecommerce-nodejs.onrender.com/success",
+    notification_url: "https://franrappazzini-mp-ecommerce-nodejs.onrender.com/notifications",
   };
 
   try {
