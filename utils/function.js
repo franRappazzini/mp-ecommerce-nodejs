@@ -9,20 +9,12 @@ mercadopago.configure({
 const createPayment = async (product) => {
   const preference = {
     items: [
-      //   {
-      //     title: "Dummy Title",
-      //     description: "Dummy description",
-      //     picture_url: "http://www.myapp.com/myimage.jpg",
-      //     category_id: "category123",
-      //     quantity: 1,
-      //     unit_price: 10,
-      //   },
-
-      // TODO falta img con url valido + id (4 números)
       {
         ...product,
+        id: 1234,
         description: "Dispositivo móvil de Tienda e-commerce",
-        picture_url: "http://localhost:3000/" + product.picture_url,
+        picture_url:
+          "https://franrappazzini-mp-ecommerce-nodejs.onrender.com/" + product.picture_url,
       },
     ],
     payer: {
@@ -33,10 +25,6 @@ const createPayment = async (product) => {
         area_code: "11",
         number: 2494209281,
       },
-      //   identification: {
-      //     type: "DNI",
-      //     number: "12345678",
-      //   },
       address: {
         street_name: "Falsa",
         street_number: 123,
@@ -55,6 +43,7 @@ const createPayment = async (product) => {
           id: "visa",
         },
       ],
+      // TODO fijarme las cuotas
       installments: 6,
     },
     external_reference: "fran_rappa@outlook.com",
