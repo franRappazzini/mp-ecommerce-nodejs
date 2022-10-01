@@ -43,7 +43,6 @@ const createPayment = async (product) => {
           id: "visa",
         },
       ],
-      // TODO fijarme las cuotas
       installments: 6,
     },
     external_reference: "fran_rappa@outlook.com",
